@@ -409,7 +409,8 @@ def schedule(request):
 def create_schedule(request, group_id):
     group = get_object_or_404(BookClubGroup, id=group_id)
     if group.owner != request.user:
-        return HttpResponseForbidden("Only the group creator can schedule meetings.")
+        messages.warning(request, f"Only the group creator can schedule meetings")
+        return redirect('schedule')
 
     if request.method == 'POST':
         form = ScheduleForm(request.POST, user=request.user)  

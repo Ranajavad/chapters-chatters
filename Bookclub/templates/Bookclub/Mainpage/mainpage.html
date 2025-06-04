@@ -89,7 +89,7 @@
         <ul>
             {% for group in my_groups %}
             <li class="flex items-start flex-row justify-between bg-neutral-50 rounded-lg p-1 shadow hover:shadow-md transition duration-200">
-                {% if group.owner == request.user %}
+           
                 <div class="flex flex-col ml-3 items-center justify-between">
                     <span class="font-semibold text-lg">{{ group.name }}</span>
                     <div class="flex items-end gap-2">
@@ -115,8 +115,6 @@
                         </form>
                     </div>
                 </div>
-
-                {% endif %}
             </li>
             {% endfor %}
         </ul>
