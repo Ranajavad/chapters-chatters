@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}Schedule - Chapters & Chatters{% endblock %}
-
+{% load custom_filters %}
 {% block content %}
 
 
@@ -26,15 +26,46 @@
         <img width="40" height="40" src="https://img.icons8.com/external-flat-icons-inmotus-design/67/external-add-edit-files-flat-icons-inmotus-design-2.png" alt="Create Meeting"/>
         Create a New Meeting
     </h2>
-    <form method="post" action="{% url 'create_schedule' creator_group.id %}">
+    <form method="post" action="{% url 'create_schedule' creator_group.id %}" class="space-y-4">
         {% csrf_token %}
-        <div class="grid gap-4 md:grid-cols-2">
-            {{ schedule_form.as_p }}
+    
+        <div>
+            <label for="id_title" class="block text-sm font-medium text-gray-700">Title</label>
+            {{ schedule_form.title|add_class:"w-full px-3 py-2 text-sm border border-gray-300 rounded" }}
         </div>
-        <button type="submit" class="mt-4 bg-[#5A725D] text-white px-4 py-2 rounded hover:bg-[#3C523F] transition">
+    
+        <div>
+            <label for="id_description" class="block text-sm font-medium text-gray-700">Description</label>
+            {{ schedule_form.description|add_class:"w-full px-3 py-2 text-sm border border-gray-300 rounded resize-none" }}
+        </div>
+    
+        <div>
+            <label for="id_date" class="block text-sm font-medium text-gray-700">Date</label>
+            {{ schedule_form.date|add_class:"w-full px-3 py-2 text-sm border border-gray-300 rounded" }}
+        </div>
+    
+        <div>
+            <label for="id_time" class="block text-sm font-medium text-gray-700">Time</label>
+            {{ schedule_form.time|add_class:"w-full px-3 py-2 text-sm border border-gray-300 rounded" }}
+        </div>
+    
+        <div>
+            <label for="id_location" class="block text-sm font-medium text-gray-700">Location</label>
+            {{ schedule_form.location|add_class:"w-full px-3 py-2 text-sm border border-gray-300 rounded" }}
+        </div>
+    
+        {% if schedule_form.book %}
+        <div>
+            <label for="id_book" class="block text-sm font-medium text-gray-700">Related Book</label>
+            {{ schedule_form.book|add_class:"w-full px-3 py-2 text-sm border border-gray-300 rounded" }}
+        </div>
+        {% endif %}
+    
+        <button type="submit" class="bg-[#5A725D] hover:bg-[#3C523F] text-white text-sm font-semibold py-2 px-5 rounded">
             📅 Add Meeting
         </button>
     </form>
+    
 
     <div class="text-red-500 text-sm mt-2">
         {{ schedule_form.non_field_errors }}

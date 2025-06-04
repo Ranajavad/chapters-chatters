@@ -145,18 +145,15 @@ class CommentForm(forms.ModelForm):
 class ScheduleForm(forms.ModelForm):
     class Meta:
         model = Schedule
-        fields = ['title', 'description', 'date', 'time', 'location', 'group']
+        fields = ['title', 'description', 'date', 'time', 'location']
         widgets = {
             'date': forms.DateInput(attrs={'type': 'date'}),
             'time': forms.TimeInput(attrs={'type': 'time'}),
         }
 
     def __init__(self, *args, **kwargs):
-        user = kwargs.pop('user', None)  
+        kwargs.pop('user', None)  
         super().__init__(*args, **kwargs)
-        if user:
-            self.fields['group'].queryset = BookClubGroup.objects.filter(owner=user)
-
 
 class EditBookClubGroupForm(forms.ModelForm):
     class Meta:

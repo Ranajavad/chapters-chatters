@@ -355,10 +355,14 @@ def schedule(request):
         user_groups.filter(id=selected_group_id).first()
         if selected_group_id else user_groups.first()
     )
-    creator_group = user_groups.filter(owner=request.user).first()
+    creator_group = active_group
     schedule_form = ScheduleForm(user=request.user) if creator_group else None
 
-    upcoming_meetings = Schedule.objects.filter(group__in=user_groups).order_by('date', 'time')
+    upcoming_meetings = (
+        Schedule.objects.filter(group=active_group).order_by('date', 'time')
+        if active_group else []
+        )
+
 
     poll = None
     poll_options = []
@@ -404,7 +408,6 @@ def schedule(request):
 @login_required
 def create_schedule(request, group_id):
     group = get_object_or_404(BookClubGroup, id=group_id)
-
     if group.owner != request.user:
         return HttpResponseForbidden("Only the group creator can schedule meetings.")
 
@@ -428,9 +431,8 @@ def create_schedule(request, group_id):
         'schedule_form': form,
         'creator_group': group,
         'upcoming_meetings': upcoming_meetings,
-        'active_polls': active_polls,
     }
-    return render(request, 'Bookclub/schedule.html', context)
+    return render(request, 'Bookclub/Schedule/schedule.html', context)
 
 @login_required
 def delete_schedule(request, schedule_id):
