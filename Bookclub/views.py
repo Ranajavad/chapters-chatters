@@ -40,12 +40,12 @@ def register(request):
             return redirect('mainpage')
     else:
         form = CustomUserCreationForm()
-    return render(request, 'Bookclub/register.html', {'form': form})
+    return render(request, 'Bookclub/login_register/register.html', {'form': form})
 
 
 def discussion_list(request):
     posts = DiscussionPost.objects.all().order_by('-created_at')
-    return render(request, 'discussions/discussion_list.html', {'posts': posts})
+    return render(request, 'Bookclub/Discussions/discussion_list.html', {'posts': posts})
 
 @login_required
 def new_post(request):
@@ -58,7 +58,7 @@ def new_post(request):
             return redirect('discussion_list')
     else:
         form = DiscussionPostForm()
-    return render(request, 'discussions/new_post.html', {'form': form})
+    return render(request, 'Bookclub/Discussions/new_post.html', {'form': form})
 
 def discussion_detail(request, post_id):
     post = get_object_or_404(DiscussionPost, id=post_id)
@@ -73,7 +73,7 @@ def discussion_detail(request, post_id):
             return redirect('discussion_detail', post_id=post_id)
     else:
         comment_form = CommentForm()
-    return render(request, 'discussions/discussion_detail.html', {
+    return render(request, 'Bookclub/Discussions/discussion_detail.html', {
         'post': post,
         'comments': comments,
         'comment_form': comment_form
@@ -111,7 +111,7 @@ def log_in(request):
                 form.add_error(None, 'Invalid username or password.')
     else:
         form = AuthenticationForm()
-    return render(request, 'Bookclub/log_in.html', {'form': form})
+    return render(request, 'Bookclub/login_register/log_in.html', {'form': form})
 
 def mainpage(request):
     if not request.user.is_authenticated:
@@ -141,7 +141,7 @@ def mainpage(request):
         'invitations':invitations,
         
     }
-    return render(request, 'Bookclub/mainpage.html', context)
+    return render(request, 'Bookclub/Mainpage/mainpage.html', context)
 
 @login_required
 def add_comment(request, post_id):
@@ -174,7 +174,7 @@ def discussions_page(request):
     
     comment_forms = {post.id: CommentForm() for post in posts}
 
-    return render(request, 'Bookclub/discussions_page.html', {
+    return render(request, 'Bookclub/Discussions/discussions_page.html', {
         'posts': posts,
         'post_form': post_form,
         'comment_forms': comment_forms,
@@ -185,7 +185,7 @@ def groups(request):
     context = {
         'my_groups': my_groups,
     }
-    return render(request,'Bookclub/groups.html',context)
+    return render(request,'Bookclub/Groups/groups.html',context)
 
 @login_required
 def add_book(request):
@@ -197,7 +197,7 @@ def add_book(request):
             return redirect('mainpage')
     else:
         form = BookForm()
-    return render(request, 'Bookclub/add_book.html', {'form': form})
+    return render(request, 'Bookclub/Book/add_book.html', {'form': form})
 
 
 @login_required
@@ -218,7 +218,7 @@ def choose_book_to_review(request):
         author__in=voted_suggestions.values_list('author', flat=True)
     ).distinct()
 
-    return render(request, 'Bookclub/choose_book.html', {'books': books})
+    return render(request, 'Bookclub/Book/choose_book.html', {'books': books})
 
 
 
@@ -246,7 +246,7 @@ def bookvote(request):
         'selected_group_id': int(selected_group_id) if selected_group_id else selected_group.id,
         'selected_group': selected_group,
     }
-    return render(request, 'Bookclub/bookvote.html', context)
+    return render(request, 'Bookclub/Book/bookvote.html', context)
 
 
 
@@ -296,7 +296,7 @@ def suggest_book(request):
     else:
         form = SuggestionForm(user=request.user)
 
-    return render(request, 'Bookclub/suggest_book.html', {'form': form})
+    return render(request, 'Bookclub/Books/suggest_book.html', {'form': form})
 
     
 @login_required
@@ -306,7 +306,7 @@ def reviews(request):
         'reviews': reviews,
         'form': ReviewForm(),  
     }
-    return render(request, 'Bookclub/reviews.html', context)
+    return render(request, 'Bookclub/Book/reviews.html', context)
 
 @login_required
 def write_review(request, book_id):
@@ -327,7 +327,7 @@ def write_review(request, book_id):
         'form': form,
         'book': book,
     }
-    return render(request, 'Bookclub/write_review.html', context)
+    return render(request, 'Bookclub/Books/write_review.html', context)
 
 @login_required
 def delete_review(request, review_id):
@@ -393,7 +393,7 @@ def schedule(request):
         'upcoming_meetings': upcoming_meetings,
     }
 
-    return render(request, 'Bookclub/schedule.html', context)
+    return render(request, 'Bookclub/Schedule/schedule.html', context)
  
 
 
@@ -441,7 +441,7 @@ def delete_schedule(request, schedule_id):
     return redirect('schedule')
 
 def chatbot(request):
-    return render(request, "Bookclub/chatbot.html")
+    return render(request, "Bookclub/Chatbot/chatbot.html")
 
 bot = ChatBot('chatbot',read_only=False,
               logic_adapters=[
@@ -562,12 +562,12 @@ def send_invitation(request):
 
         else:
             user_groups = BookClubGroup.objects.filter(members=request.user)
-            return render(request, 'Bookclub/mainpage.html', {'form': form, 'user_groups': user_groups})
+            return render(request, 'Bookclub/Mainpage/mainpage.html', {'form': form, 'user_groups': user_groups})
 
     else:
         form = InvitationForm(user=request.user)
         user_groups = BookClubGroup.objects.filter(members=request.user)
-        return render(request, 'Bookclub/mainpage.html', {'form': form, 'user_groups': user_groups})
+        return render(request, 'Bookclub/Mainpage/mainpage.html', {'form': form, 'user_groups': user_groups})
 
               
 @login_required
@@ -657,7 +657,7 @@ def update_current_read(request, group_id):
         return redirect('mainpage')
 
     group_books = Book.objects.filter(group=group)
-    return render(request, 'Bookclub/edit_current_read.html', {
+    return render(request, 'Bookclub/Mainpage/edit_current_read.html', {
         'group': group,
         'books': group_books
     })
@@ -689,7 +689,7 @@ def edit_group(request, group_id):
     else:
         form = EditBookClubGroupForm(instance=group)
 
-    return render(request, 'Bookclub/edit_group.html', {'form': form, 'group': group})
+    return render(request, 'Bookclub/Groups/edit_group.html', {'form': form, 'group': group})
 
 @login_required
 def add_poll_option(request, group_id):
