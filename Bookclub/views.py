@@ -331,7 +331,7 @@ def write_review(request, book_id):
         'form': form,
         'book': book,
     }
-    return render(request, 'Bookclub/Books/write_review.html', context)
+    return render(request, 'Bookclub/Book/write_review.html', context)
 
 @login_required
 def delete_review(request, review_id):
