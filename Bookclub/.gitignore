@@ -1,23 +1,21 @@
-# Entornos virtuales (por si está dentro del proyecto)
+
 venv/
 env/
 
-# Archivos de base de datos
+
+db.sqlite3.*
 db.sqlite3
 *.sqlite3
 
-# Archivos de configuración locales
 *.pyc
 __pycache__/
 *.pyo
 *.pyd
 *.log
 
-# Archivos de migración (opcional si no quieres subirlos)
 **/migrations/*.py
 !**/migrations/__init__.py
 
-# Archivos de usuario o IDE
 *.swp
 *.swo
 *.bak
@@ -27,6 +25,5 @@ __pycache__/
 .idea/
 .vscode/
 
-# Archivos generados por Django
 /static/
 media/
