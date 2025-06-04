@@ -34,7 +34,7 @@
     {% if suggestions %}
     <ul class="flex gap-5 flex-wrap justify-around">
         {% for suggestion in suggestions %}
-        <li class="bg-white flex flex-col justify-between shadow rounded group transition-all duration-300 ease-in-out hover:shadow-2xl w-72 h-72">
+        <li class=" flex flex-col justify-between shadow rounded group transition-all duration-300 ease-in-out hover:shadow-2xl w-72 h-72">
             <div class="relative w-full h-full">
                 {% if suggestion.book_cover %}
                     <img src="{{ suggestion.book_cover.url }}" alt="Book cover for {{ suggestion.title }}"
@@ -46,12 +46,8 @@
 
                 <form method="POST" action="{% url 'delete_suggestion' suggestion.id %}" class="absolute left-0 top-0">
                     {% csrf_token %}
-                    <button type="submit" title="Delete suggestion">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 40 64"
-                             class="opacity-60 transition-all hover:scale-150 duration-300 ease-in-out hover:opacity-100"
-                             style="fill:#FA5252;">
-                            <path d="M 28 6 C 25.791 6 24 7.791 24 10 ... z"></path>
-                        </svg>
+                    <button type="submit" class="text-xs bg-red-700 text-white  rounded p-1 opacity-60 transition-opacity duration-300 ease-in-out hover:opacity-100" title="Delete suggestion">
+                   Delete
                     </button>
                 </form>
 
