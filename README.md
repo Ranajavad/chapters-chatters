@@ -8,8 +8,8 @@ Password: hello1999
 
 ### Guide: 
 How to execute 
-python.py makemigrations
-python.py migrate
-python manage.py loaddata data.json
+1. python.py makemigrations
+2. python.py migrate
+3. python manage.py loaddata data.json
 
 
