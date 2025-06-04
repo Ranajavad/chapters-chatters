@@ -300,7 +300,7 @@ def suggest_book(request):
     else:
         form = SuggestionForm(user=request.user)
 
-    return render(request, 'Bookclub/Books/suggest_book.html', {'form': form})
+    return render(request, 'Bookclub/Book/suggest_book.html', {'form': form})
 
     
 @login_required
