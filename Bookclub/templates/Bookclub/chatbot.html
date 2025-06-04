@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block title %}Mainpage - Chapters & Chatters{% endblock %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Chatbot - Chapters & Chatters</title>
+    {% load static %}
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div>
+       
+        <div id="defaultQuestions" class="flex flex-row gap-2 text-sm justify-center text-white">
+            <span onclick="defaultQuestions('how can I create a new book club?')" class="question bg-[#4B2E1D] p-2 rounded-2xl cursor-pointer hover:-translate-y-2 transition duration-300 ease-in-out opacity-80 hover:opacity-100">
+                how can I create a new book club?
+            </span>
+            <span onclick="defaultQuestions('can you recommend a book?')" class="question bg-[#4B2E1D] p-2 rounded-2xl cursor-pointer hover:-translate-y-2 transition duration-300 ease-in-out opacity-80 hover:opacity-100">
+                can you recommend a book?
+            </span>
+            <span onclick="defaultQuestions('what are the top rated books?')" class="question bg-[#4B2E1D] p-2 rounded-2xl cursor-pointer hover:-translate-y-2 transition duration-300 ease-in-out opacity-80 hover:opacity-100">
+                what are the top rated books?
+            </span>
+        </div>
+
+       
+        <div id="chatbot" class="w-full flex flex-col items-start min-h-20 shadow mt-5 p-3">
+           
+        </div>
+
+        
+        <div class="flex items-center justify-center w-full gap-2 mt-3">
+            <input type="text" id="textInput" name="userMessage" class="w-1/2 p-2 border rounded border-[#4B2E1D] bg-transparent" placeholder="Type your question..." >
+            <input type="submit" class="bg-[#5A725D] hover:bg-[#3C523F] text-white px-4 py-2 rounded" value="Send" id="buttonInput">
+        </div>
+    </div>
+
+    
+    <script>
+        function defaultQuestions(question) {
+            $('#textInput').val(question);
+            setTimeout(() => getUserResponse(), 200);
+        }
+
+        function getUserResponse() {
+            var userText = $('#textInput').val();
+            if (!userText) return;
+
+            var userHTML = "<p class='userText bg-neutral-50 transition-all duration-300 ease-in-out hover:bg-neutral-100 rounded-xl p-2 mb-2 self-end'> 🧚🏼‍♀️ <span>" + userText + "</span></p>";
+            $('#textInput').val("");
+            $('#chatbot').append(userHTML);
+
+            $.get('getResponse', { userMessage: userText }).done(function (data) {
+                var botReply = "<p class='botText transition-all duration-300 ease-in-out hover:bg-neutral-100 mb-2 bg-neutral-50 rounded-xl p-2'> 🤖 <span>" + data + "</span></p>";
+                $('#chatbot').append(botReply);
+            });
+        }
+
+        $('#buttonInput').click(getUserResponse);
+
+        
+        $(document).ready(function () {
+            const messages = [
+                "👋 Hello! I’m the Chapters & Chatters chatbot. I’m still learning, so thank you for your patience!",
+                "Chapters & Chatters is a friendly book club platform where members can suggest books, vote on what to read next, and share reviews.",
+                "You can also schedule meetings and propose dates for your club to meet and discuss."
+            ];
+
+            messages.forEach(msg => {
+                const botMessage = `<p class="botText transition-all duration-300 ease-in-out hover:bg-neutral-100 mb-2 bg-neutral-50 rounded-xl p-2"> 🤖 <span>${msg}</span></p>`;
+                $('#chatbot').append(botMessage);
+            });
+        });
+    </script>
+</body>
+</html>
+
+{% endblock %}

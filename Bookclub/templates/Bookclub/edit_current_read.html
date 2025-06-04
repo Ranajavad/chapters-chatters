@@ -1,0 +1,27 @@
+<h2 style="color: #5A725D; font-size: 1.5em; margin-bottom: 1em;">
+    📖 Edit Current Read for {{ group.name }}
+  </h2>
+  
+  <form method="post" style="margin-top: 1em;">
+    {% csrf_token %}
+  
+    <label for="book_id" style="display: block; margin-bottom: 0.5em; font-weight: bold;">
+      Select a book:
+    </label>
+  
+    <select name="book_id" id="book_id"
+      style="width: 100%; padding: 0.5em; border: 1px solid #ccc; border-radius: 4px; margin-bottom: 1em;">
+      <option value="">-- Clear current read --</option>
+      {% for book in books %}
+        <option value="{{ book.id }}" {% if group.current_read == book %}selected{% endif %}>
+          {{ book.title }} by {{ book.author }}
+        </option>
+      {% endfor %}
+    </select>
+  
+    <button type="submit"
+      style="background-color: #5A725D; color: white; padding: 0.5em 1em; border: none; border-radius: 4px; cursor: pointer;">
+      Save
+    </button>
+  </form>
+  

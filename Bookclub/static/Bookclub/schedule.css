@@ -1,0 +1,192 @@
+body {
+    font-family: sans-serif;
+    background-color: #F4E9D8;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+header {
+    background-color: #E0D4C4; 
+    color: #4B2E1D;
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    font-family: 'Major Mono Display', monospace;
+    font-size: 32px;
+    color: #4B2E1D;
+    margin-bottom: 0;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #5A725D;
+    font-family: "Elsie Swash Caps";
+    font-size: 1.2em;
+    display: block;
+    padding: 10px 15px;
+}
+
+nav ul li.active a {
+    font-weight: bold;
+    color: #4B2E1D;
+}
+
+nav ul li.dropdown {
+    position: relative;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 120px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content a {
+    color: #5A725D;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+main {
+    padding: 20px;
+}
+
+section {
+    margin-bottom: 30px;
+    background-color: #FFF;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+section h2 {
+    color: #4B2E1D;
+    border-bottom: 2px solid #E0D4C4;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+#upcoming-meetings ul {
+    list-style: none;
+    padding: 0;
+}
+
+#upcoming-meetings li {
+    border-bottom: 1px solid #eee;
+    padding: 15px 0;
+}
+
+#upcoming-meetings li:last-child {
+    border-bottom: none;
+}
+
+#upcoming-meetings h3 {
+    color: #5A725D;
+    margin-top: 0;
+}
+
+.poll {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.poll h3 {
+    color: #5A725D;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.poll form {
+    padding: 10px 0;
+}
+
+.poll label {
+    margin-left: 5px;
+}
+
+.poll button {
+    background-color: #5A725D;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    margin-top: 10px;
+}
+
+.poll button:hover {
+    background-color: #3C523F;
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #E0D4C4;
+    color: #4B2E1D;
+    font-size: 0.9em;
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+}
+
+.messages {
+    list-style: none;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.messages li {
+    padding: 8px 15px;
+    margin-bottom: 5px;
+    border-radius: 3px;
+}
+
+.messages .success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.messages .warning {
+    background-color: #fff3cd;
+    color: #85640c;
+    border: 1px solid #ffeeba;
+}
+
+.messages .error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}

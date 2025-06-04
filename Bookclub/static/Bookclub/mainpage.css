@@ -1,0 +1,139 @@
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f4e9d8;
+  color: #4b2e1d;
+  margin: 0;
+}
+header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center; 
+  padding: 50px 0; 
+}
+.logo {
+  margin-bottom: 20px; 
+}
+
+
+header .logo img {
+  max-width: 500px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  height: auto;  
+  border-radius: 100px; 
+}
+header h1 {
+  font-family: 'Major Mono Display', monospace;
+  font-size: 2.5rem;
+  color: #4b2e1d;
+  margin-bottom: 0;
+}
+
+main {
+  padding: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+main .section {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background-color: #f4e9d8;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+main .section h2 {
+  font-family: 'Elsie Swash Caps', serif;
+  color: #4b2e1d;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+main .section p {
+  color: #4b2e1d;
+  line-height: 1.6;
+}
+main .section form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 1rem;
+}
+main .section form input,
+main .section form select {
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  width: 100%;
+  max-width: 300px;
+  border: 1px solid #d3c9c1;
+  border-radius: 0.375rem;
+  font-family: 'Inter', sans-serif;
+  color: #4b2e1d;
+}
+main .section form button {
+  padding: 0.75rem 1.5rem;
+  background-color: #5a725d;
+  color: #f4e9d8;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  font-family: 'Elsie Swash Caps', serif;
+  font-size: 1.1rem;
+  transition: background-color 0.3s ease;
+  margin-top: 0.5rem;
+}
+main .section form button:hover {
+  background-color: #4b2e1d;
+}
+main .section .invitations-list {
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 1px solid #d3c9c1;
+  border-radius: 0.375rem;
+  background-color: #f4e9d8;
+}
+main .section .invitations-list h3 {
+  font-family: 'Elsie Swash Caps', serif;
+  color: #4b2e1d;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+main .section .invitations-list ul {
+  list-style: disc;
+  padding-left: 2rem;
+  margin-bottom: 0;
+}
+main .section .invitations-list li{
+  color: #4b2e1d;
+}
+main .section .group-list {
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 1px solid #d3c9c1;
+  border-radius: 0.375rem;
+  background-color: #f4e9d8;
+}
+main .section .group-list ul {
+  list-style: disc;
+  padding-left: 2rem;
+  margin-bottom: 0;
+}
+main .section .group-list li{
+  color: #4b2e1d;
+}
+main .section a {
+  color: #5a725d;
+  text-decoration: none;
+  font-family: 'Elsie Swash Caps', serif;
+  margin-top: 1rem;
+  display: inline-block;
+}
+ main .section a:hover {
+  color: #4b2e1d;
+}
+footer {
+  text-align: center;
+  padding: 1rem 0;
+  margin-top: 2rem;
+  border-top: 1px solid #d3c9c1;
+  color: #4b2e1d;
+}
+

@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+{% block title %}Mainpage - Chapters & Chatters{% endblock %}
+
+{% block content %}
+
+<section class="section">
+    <h2 class="flex items-center gap-3 text-2xl font-bold text-[#4B2E1D]">
+        <img width="32" height="32" src="https://img.icons8.com/keek/100/hand-peace.png" alt="hand-peace"/>
+        Welcome to Your Mainpage
+    </h2>
+    <p>Here, you can manage your book clubs and connect with other members.</p>
+
+    <h2 class="text-xl font-semibold mt-4">Your Current Reads</h2>
+    {% for group in my_groups %}
+    <div style="margin-bottom: 1em; border: 1px solid #ccc; padding: 1em;">
+        <h3>{{ group.name }}</h3>
+        {% if group.current_read %}
+        <p><strong>Current Read:</strong>
+            <img width="24" height="24" src="https://img.icons8.com/color/48/storytelling.png" alt="storytelling" class="inline-block align-middle"/>
+            {{ group.current_read.title }} by {{ group.current_read.author }}
+        </p>
+        {% else %}
+        <p><em>No current read selected yet.</em></p>
+        {% endif %}
+
+        {% if group.owner == request.user %}
+        <form method="get" action="{% url 'update_current_read' group.id %}">
+            <button type="submit">Edit Current Read</button>
+        </form>
+        {% endif %}
+    </div>
+    {% endfor %}
+</section>
+
+<div class="flex flex-row w-full justify-between gap-8">
+    <section class="section w-1/2">
+        <h2 class="flex items-center gap-2 text-xl font-semibold text-[#4B2E1D]">
+            <img width="40" height="40" src="https://img.icons8.com/scribby/50/invite.png" alt="invite"/>
+            Invite Members
+        </h2>
+        <form method="post" action="{% url 'send_invitation' %}">
+            {% csrf_token %}
+            <input type="email" name="email" placeholder="Enter email address" class="mb-2 w-full p-2 border rounded" />
+            <input type="text" name="username" placeholder="Or enter username" class="mb-2 w-full p-2 border rounded" />
+            <select name="group" class="mb-2 w-full p-2 border rounded">
+                {% for group in my_groups %}
+                <option value="{{ group.id }}">{{ group.name }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit" class="bg-[#5A725D] hover:bg-[#3C523F] text-white px-4 py-2 rounded">Send Invitation</button>
+        </form>
+    </section>
+
+    <section class="section w-1/2">
+        <h3 class="flex items-center gap-2 text-lg font-semibold text-[#4B2E1D] mb-2">
+            <img width="40" height="40" src="https://img.icons8.com/color/48/hourglass-sand-top.png" alt="pending"/>
+            Pending Invitations
+        </h3>
+        {% if invitations %}
+        <ul class="space-y-2">
+            {% for invitation in invitations %}
+            <li class="bg-white p-3 rounded shadow flex justify-between items-center">
+                <span>
+                    Invite to <strong>{{ invitation.group.name }}</strong> from {{ invitation.invited_by.username }} on
+                    {{ invitation.sent_at|date:"M d, Y" }}
+                </span>
+                <span>
+                    <a href="{% url 'accept_invitation' invitation.invite_code %}"
+                        class="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded mr-2">Accept</a>
+                    <a href="{% url 'decline_invitation' invitation.invite_code %}"
+                        class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded">Decline</a>
+                </span>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>No pending invitations.</p>
+        {% endif %}
+    </section>
+</div>
+
+<section class="section mt-10">
+    <h2 class="flex items-center gap-2 text-xl font-bold text-[#5A725D] mb-4">
+        <img width="40" height="40" src="https://img.icons8.com/external-smashingstocks-flat-smashing-stocks/66/external-Books-business-smashingstocks-flat-smashing-stocks.png" alt="book clubs"/>
+        Your Book Clubs
+    </h2>
+    <div class="group-list">
+        {% if my_groups %}
+        <ul>
+            {% for group in my_groups %}
+            <li class="flex items-start flex-row justify-between bg-neutral-50 rounded-lg p-1 shadow hover:shadow-md transition duration-200">
+                {% if group.owner == request.user %}
+                <div class="flex flex-col ml-3 items-center justify-between">
+                    <span class="font-semibold text-lg">{{ group.name }}</span>
+                    <div class="flex items-end gap-2">
+                        <a href="{% url 'edit_group' group.id %}"
+                           class="bg-white border border-[#5A725D] text-[#5A725D] hover:bg-[#F4F8F5] text-sm p-1 rounded">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                 stroke-width="1.5" stroke="currentColor" class="w-7 h-7">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                      d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 
+                                      2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 
+                                      18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 
+                                      0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 
+                                      15.75 21H5.25A2.25 2.25 0 0 1 
+                                      3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                            </svg>
+                        </a>
+                        <form method="post" action="{% url 'delete_group' group.id %}"
+                              onsubmit="return confirm('Are you sure you want to delete the book club {{ group.name }}?');">
+                            {% csrf_token %}
+                            <button type="submit" class="bg-red-600 hover:bg-red-700 text-white text-sm rounded">
+                                Delete
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>You are not a member of any book club yet.</p>
+        {% endif %}
+    </div>
+</section>
+
+<section class="section mt-6">
+    <h3 class="flex items-center gap-2 text-lg font-semibold text-[#4B2E1D]">
+        <img width="40" height="40" src="https://img.icons8.com/external-flat-icons-inmotus-design/67/external-add-edit-files-flat-icons-inmotus-design-2.png" alt="add"/>
+        Create New Book Club
+    </h3>
+    <form method="post" action="{% url 'mainpage' %}">
+        {% csrf_token %}
+        {% if form.errors %}
+        <div class="error-message mb-4 text-red-600">
+            <ul>
+                {% for field in form %}
+                {% for error in field.errors %}
+                <li>{{ field.label }}: {{ error }}</li>
+                {% endfor %}
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        <div class="mb-4">
+            {{ form.name }}
+        </div>
+        <div class="mb-4">
+            {{ form.description }}
+        </div>
+        <div class="mb-4">
+            <label for="id_is_public">{{ form.is_public.label }}</label>
+            {{ form.is_public }}
+        </div>
+        <button type="submit" class="bg-[#5A725D] hover:bg-[#3C523F] text-white px-4 py-2 rounded">Create Group</button>
+    </form>
+</section>
+
+{% endblock %}

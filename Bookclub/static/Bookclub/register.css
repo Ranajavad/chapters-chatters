@@ -1,0 +1,133 @@
+body {
+    background-color: #F4E9D8;
+    color: #4B2E1D;
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo {
+    margin-bottom: 10px;
+    max-width: 400px;
+    height: auto;
+    margin-top: 50px;
+}
+
+.logo img {
+    width: 400px;
+    height: auto;
+    opacity: 1;
+    border-radius: 100px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+    font-family: 'Major Mono Display', monospace;
+    font-size: 32px;
+    color: #4B2E1D;
+    margin-bottom: 0;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    flex-grow: 1;
+    padding-bottom: 20px;
+    box-sizing: border-box;
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.form-container {
+    background-color: #F4E9D8;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+    width: 80%;
+    max-width: 400px;
+    box-sizing: border-box;
+}
+
+.form-container h2 {
+    font-family: 'Elsie Swash Caps', monospace;
+    color: #4B2E1D;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2em;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #4B2E1D;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #9AAE9C;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+}
+
+.form-group button {
+    background-color: #4B2E1D;
+    color: #F4E9D8;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    width: 100%;
+    display: block;
+    margin: 0 auto;
+}
+
+.form-group button:hover {
+    opacity: 0.8;
+}
+
+.error-message {
+    color: red;
+    margin-bottom: 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+}
+
+.login-link {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #4B2E1D;
+}

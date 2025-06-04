@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Chapters & Chatters</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Major+Mono+Display:wght@400;700&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../../../static/Bookclub/register.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <img src="../../../static/images/lofi.gif" alt="Chapters & Chatters Logo">
+        </div>
+        <h1>Chapters & Chatters</h1>
+    </header>
+
+    <main>
+        <div class="form-container">
+ 
+
+            <h2>Register</h2>
+            <div id="error-message" class="error-message" style="display: none;"></div>
+            <form id="register-form" method="post" action="{% url 'register' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="id_username">{{ form.username.label }}</label>
+                    {{ form.username }}
+                </div>
+                <div class="form-group">
+                    <label for="id_password1">{{ form.password1.label }}</label>
+                    {{ form.password1 }}
+                </div>
+                <div class="form-group">
+                    <label for="id_password2">{{ form.password2.label }}</label>
+                    {{ form.password2 }}
+                </div>
+                <div class="form-group">
+                    <label for="id_email">{{ form.email.label }}</label>
+                    {{ form.email }}
+                </div>
+                {% if form.errors %}
+                <div class="error-message">
+                    <ul>
+                        {% for field in form %}
+                        {% for error in field.errors %}
+                        <li>{{ field.label }}: {{ error }}</li>
+                        {% endfor %}
+                        {% endfor %}
+                        {% for error in form.non_field_errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+                <div class="form-group">
+                    <button type="submit">Register</button>
+                </div>
+                <p class="login-link">Already have an account? <a href="{% url 'log_in' %}">Log In here</a>.</p>
+            </form>
+
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Chapters & Chatters</p>
+    </footer>
+</body>
+
+</html>

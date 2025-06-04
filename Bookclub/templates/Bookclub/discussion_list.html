@@ -1,0 +1,9 @@
+<h1>Discussions</h1>
+<a href="{% url 'new_post' %}">Create new post</a>
+{% for post in posts %}
+    <div>
+        <h3><a href="{% url 'discussion_detail' post.id %}">{{ post.title }}</a></h3>
+        <p>by {{ post.author.username }} on {{ post.created_at }}</p>
+        <p>{{ post.total_likes }} 👍 {{ post.total_dislikes }} 👎</p>
+    </div>
+{% endfor %}

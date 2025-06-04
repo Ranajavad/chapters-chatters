@@ -1,0 +1,33 @@
+
+
+{% extends "base.html" %}
+
+{% block title %}Mainpage - Chapters & Chatters{% endblock %}
+
+{% block content %}
+
+        <div class="group-list px-8 py-6">
+            {% if my_groups %}
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {% for group in my_groups %}
+                <div class=" bg-gradient-to-br from-white via-gray-50 to-gray-100   rounded-2xl shadow-lg p-6 hover:shadow-2xl transition-shadow duration-300">
+                    <h2 class="text-2xl font-bold mb-2"><img width="100" height="100" src="https://img.icons8.com/pin/100/book-shelf.png" alt="book-shelf"/> {{ group.name }}</h2>
+                    <p class="text-sm text-gray-600 mb-4"><span class="font-semibold">Description:</span> {{ group.description }}</p>
+                    <h3 class="text-md font-semibold text-gray-800 mb-1">👤 Members</h3>
+                    <ul class="list-disc list-inside text-gray-700 text-sm">
+                        {% for member in group.members.all %}
+                        <li>{{ member.username }}</li>
+                        {% empty %}
+                        <li><em>No members yet</em></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <p class="text-center text-gray-600 text-lg">You are not a member of any book club yet.</p>
+            {% endif %}
+        </div>
+
+        
+        {% endblock %}

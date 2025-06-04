@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Chapters & Chatters{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Elsie+Swash+Caps:wght@400;700&family=Major+Mono+Display:wght@400;700&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'Bookclub/mainpage.css' %}">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+{% if messages %}
+  <div id="toast-container" class="fixed top-5 right-5 z-50 space-y-2">
+    {% for message in messages %}
+      <div class="toast px-4 py-2 rounded shadow text-sm text-white animate-fade-in-up
+                  {% if message.tags == 'success' %} bg-green-600
+                  {% elif message.tags == 'error' %} bg-red-600
+                  {% elif message.tags == 'warning' %} bg-yellow-600 text-black
+                  {% else %} bg-gray-800
+                  {% endif %}">
+        {{ message }}
+      </div>
+    {% endfor %}
+  </div>
+
+  <script>
+   
+    setTimeout(() => {
+      document.querySelectorAll('.toast').forEach(toast => {
+        toast.classList.add('opacity-0', 'translate-y-2');
+        setTimeout(() => toast.remove(), 500);
+      });
+    }, 3000);
+  </script>
+
+  <style>
+    @keyframes fade-in-up {
+      0% {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-fade-in-up {
+      animation: fade-in-up 0.3s ease-out;
+      transition: opacity 0.5s, transform 0.5s;
+    }
+  </style>
+{% endif %}
+
+<body>
+    {% include "navbar.html" %}
+
+    <main id="page-content" class="opacity-0 transition-opacity duration-1000">
+        {% block content %}
+        
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Chapters & Chatters</p>
+    </footer>
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+          const content = document.getElementById('page-content');
+          if (content) {
+            content.classList.remove('opacity-0');
+            content.classList.add('opacity-100');
+          }
+        });
+      </script>
+      
+
+</body>
+</html>

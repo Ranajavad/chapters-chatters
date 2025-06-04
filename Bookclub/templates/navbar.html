@@ -1,0 +1,54 @@
+<header>
+    <div class="logo">
+        <img src="../../../static/images/lofi.gif" alt="Chapters & Chatters Logo">
+    </div>
+    <h1>Chapters & Chatters</h1>
+</header>
+
+<nav class="bg-[#f4e9d8] sticky top-0 z-50 py-4 border-b border-[#d3c9c1]">
+    <ul class="flex justify-center list-none p-0 m-0">
+        <li class="{% if request.path == '/mainpage/' %}font-bold text-[#4b2e1d]{% endif %} mx-6">
+            <a href="{% url 'mainpage' %}" class="text-[#5a725d] font-['Elsie_Swash_Caps'] text-[1.2rem] hover:text-[#4b2e1d] {% if request.path == '/' %}font-bold text-[#4b2e1d]{% endif %}">Mainpage</a>
+        </li>
+        <li class="relative mx-6 group">
+            <div class="inline-block">
+                <a href="#" class="text-[#5a725d] font-['Elsie_Swash_Caps'] text-[1.2rem] hover:text-[#4b2e1d]">
+                    Books
+                </a>
+                <div class="absolute left-0  w-[160px] bg-[#f4e9d8] shadow-lg border border-[#d3c9c1] hidden group-hover:block z-50">
+                    <a href="{% url 'bookvote' %}"
+                       class="block px-4 py-3 text-left text-[#5a725d] whitespace-nowrap hover:bg-[#f4e9d8] hover:text-[#4b2e1d] {% if request.path == '/bookvote/' %}font-bold text-[#4b2e1d]{% endif %}">
+                       Votes
+                    </a>
+                    <a href="{% url 'reviews' %}"
+                       class="block px-4 py-3 text-left text-[#5a725d] whitespace-nowrap hover:bg-[#f4e9d8] hover:text-[#4b2e1d] {% if request.path == '/reviews/' %}font-bold text-[#4b2e1d]{% endif %}">
+                       Reviews
+                    </a>
+                </div>
+            </div>
+        </li>                 
+        <li class="{% if request.path == '/mainpage/groups/' %}font-bold text-[#4b2e1d]{% endif %} mx-6">
+            <a href="{% url 'groups' %}" class="text-[#5a725d] font-['Elsie_Swash_Caps'] text-[1.2rem] hover:text-[#4b2e1d] {% if request.path == '/groups/' %}font-bold text-[#4b2e1d]{% endif %}">Groups</a>
+        </li>
+        <li class="{% if 'chatbot' in request.path %}font-bold text-[#4b2e1d]{% endif %} mx-6">
+            <a href="{% url 'chatbot' %}" class="text-[#5a725d] font-['Elsie_Swash_Caps'] text-[1.2rem] hover:text-[#4b2e1d]">Chatbot</a>
+        </li>
+        <li class="{% if 'schedule' in request.path %}font-bold text-[#4b2e1d]{% endif %} mx-6">
+            <a href="{% url 'schedule' %}" class="text-[#5a725d] font-['Elsie_Swash_Caps'] text-[1.2rem] hover:text-[#4b2e1d]">Schedule</a>
+        </li>
+        <li class="{% if 'discussions' in request.path %}font-bold text-[#4b2e1d]{% endif %} mx-6">
+            <a href="{% url 'discussions_page' %}" class="text-[#5a725d] font-['Elsie_Swash_Caps'] text-[1.2rem] hover:text-[#4b2e1d]">Discussions</a>
+
+        </li>
+        {% if user.is_authenticated %}
+    <li class="mx-6">
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="text-[#5a725d] font-['Elsie_Swash_Caps'] text-[1.2rem] hover:text-[#4b2e1d] fixed top-3">
+                Log Out
+            </button>
+        </form>
+    </li>
+{% endif %}
+    </ul>
+</nav>

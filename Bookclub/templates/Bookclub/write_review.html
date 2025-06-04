@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block title %}Write a Review{% endblock %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto p-6">
+    <h1 class="text-2xl font-bold text-[#4B2E1D] mb-6">Write a Review</h1>
+
+    <div class="mb-4">
+        <p class="text-lg"><strong>Book:</strong> {{ book.title }} by {{ book.author }}</p>
+    </div>
+
+    <form method="post" class="bg-white p-4 rounded shadow">
+        {% csrf_token %}
+
+        <div class="mb-4">
+            <label class="block font-bold">Rating</label>
+            <div id="star-rating" class="flex space-x-1 cursor-pointer text-2xl">
+                {% for i in "12345"|make_list %}
+                    <span data-value="{{ i }}" class="text-gray-400">☆</span>
+                {% endfor %}
+            </div>
+            {{ form.rating }}
+            {{ form.rating.errors }}
+        </div>
+
+        <div class="mb-4">
+            <label class="block font-bold">Comment</label>
+            {{ form.text }}
+            {{ form.text.errors }}
+        </div>
+
+        <button type="submit" class="bg-[#5A725D] hover:bg-[#3C523F] text-white font-bold py-2 px-4 rounded">
+            Submit Review
+        </button>
+    </form>
+</div>
+
+<script>
+    const stars = document.querySelectorAll('#star-rating span');
+    const ratingInput = document.getElementById('id_rating');
+
+    stars.forEach(star => {
+        star.addEventListener('click', () => {
+            const rating = parseInt(star.dataset.value);
+            ratingInput.value = rating;
+
+            
+            stars.forEach(s => {
+                s.textContent = parseInt(s.dataset.value) <= rating ? '★' : '☆';
+                s.classList.toggle('text-yellow-500', parseInt(s.dataset.value) <= rating);
+            });
+        });
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,172 @@
+body {
+    background-color: #F4E9D8;
+    color: #4B2E1D;
+    font-family: 'Gafata', sans-serif;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo {
+    margin-bottom: 30px;
+    margin-top: 50px;
+    text-align: center; 
+}
+
+.logo img {
+    width: 500px;
+    height: auto;  
+    border-radius: 100px; 
+    display: block; 
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+}
+
+
+h1 {
+    font-family: 'Major Mono Display', monospace;
+    font-size: 32px;
+    color: #4B2E1D;
+    margin-bottom: 0;
+}
+
+.quote-box {
+    background: linear-gradient(to bottom, #C1CEC2, #9AAE9C);
+    padding: 20px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 800px;
+    box-sizing: border-box;
+}
+
+.quote1 {
+    font-size: 24px;
+    color: #4B2E1D;
+    font-family: 'Gafata', sans-serif;
+    margin-bottom: 10px;
+}
+
+.quote2 {
+    font-size: 32px;
+    color: #354137;
+    font-family: 'Gafata', sans-serif;
+    font-weight: bold;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    flex-grow: 1;
+    padding-bottom: 20px;
+    box-sizing: border-box;
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.register-login {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.register-login button {
+    background-color: #4B2E1D;
+    color: #F4E9D8;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    margin: 0 10px;
+    cursor: pointer;
+    font-family: 'Gafata', sans-serif;
+}
+
+.register-login button:hover {
+    opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+    .quote-box {
+        width: 95%;
+        padding: 15px;
+    }
+
+    .quote1 {
+        font-size: 20px;
+    }
+
+    .quote2 {
+        font-size: 24px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    .logo {
+        max-width: 80px;
+    }
+
+    .register-login button {
+        font-size: 14px;
+        padding: 8px 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .quote-box {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .quote1 {
+        font-size: 18px;
+    }
+
+    .quote2 {
+        font-size: 20px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    .register-login {
+        flex-direction: column;
+    }
+
+    .register-login button {
+        margin: 10px 0;
+        width: 90%;
+        max-width: 300px;
+    }
+
+    .logo {
+        max-width: 60px;
+    }
+}

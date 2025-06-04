@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapters & Chatters</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Gafata&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../static/Bookclub/homepage.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="opacity-0 transition-opacity duration-1000">
+    <header> 
+        <div class="logo">
+            <img src="../../../static/images/lofi.gif" alt="Chapters & Chatters Logo">
+        </div>
+        <h1>Chapters & Chatters</h1>
+    </header>
+
+    <main>
+        <div class="quote-box">
+            <p class="quote1">"Reading is better when shared - with friends, with tea, with laughter."</p>
+            <p class="quote2">Create your own book club today</p>
+        </div>
+
+        <div class="register-login">
+            <form action="{% url 'register' %}" method="get">
+
+                <button id="register-button">Register</button>
+
+            </form>
+
+            <form action="{% url 'log_in' %}" method="get">
+
+                <button id="login-button">Log In</button>
+
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Chapters & Chatters</p>
+    </footer>
+    <script>
+       window.onload = function () {
+    document.body.classList.remove('opacity-0');
+    document.body.classList.add('opacity-100');
+  };
+      </script>
+      
+</body>
+</html>

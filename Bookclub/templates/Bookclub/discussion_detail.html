@@ -1,0 +1,24 @@
+<h1>{{ post.title }}</h1>
+<p>{{ post.content }}</p>
+<p>By {{ post.author.username }} | {{ post.created_at }}</p>
+
+<form action="{% url 'like_post' post.id %}" method="post">
+    {% csrf_token %}
+    <button type="submit">👍 {{ post.total_likes }}</button>
+</form>
+<form action="{% url 'dislike_post' post.id %}" method="post">
+    {% csrf_token %}
+    <button type="submit">👎 {{ post.total_dislikes }}</button>
+</form>
+
+<h2>Comments</h2>
+{% for comment in comments %}
+    <p><strong>{{ comment.author.username }}</strong>: {{ comment.content }}</p>
+{% endfor %}
+
+<h3>Add a comment</h3>
+<form method="post">
+    {% csrf_token %}
+    {{ comment_form.as_p }}
+    <button type="submit">Comment</button>
+</form>
