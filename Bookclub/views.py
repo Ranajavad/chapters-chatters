@@ -234,6 +234,10 @@ def bookvote(request):
         selected_group = get_object_or_404(BookClubGroup, id=selected_group_id, members=user)
     else:
         selected_group = user_groups.first()
+    
+    if not selected_group:
+        messages.warning(request, " You must create a bookclub group first in order to vote for books!")
+        return render(request, 'Bookclub/Mainpage/mainpage.html')
 
     
     suggestions = Suggestion.objects.filter(group=selected_group)
