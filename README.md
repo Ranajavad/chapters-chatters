@@ -1,3 +1,7 @@
+# YOUTUBE VIDEO LINK HERE
+https://www.youtube.com/watch?v=OzESOiKm4nc
+
+
 ### Sample user credentials for application testing: 
 Used in video:
 Username: test123
